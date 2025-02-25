@@ -11,6 +11,7 @@ use common\models\youmi\FaceProcessLog;
 use common\services\youmi\PictureService;
 use Yii;
 use yii\web\UploadedFile;
+use frontend\controllers\BaseController;
 
 class RecipeController extends BaseController
 {

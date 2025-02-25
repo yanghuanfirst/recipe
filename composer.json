@@ -1,7 +1,8 @@
 {
-    "name": "ysx/recipe",
+    "name": "ysx123/recipe",
     "description": "A face",
-    "minimum-stability": "1.0.0",
+    "minimum-stability": "dev",
+    "version": "1.0.0",
     "require": {},
     "autoload": {
         "psr-4": {
