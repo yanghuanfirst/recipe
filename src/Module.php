@@ -10,5 +10,6 @@ class Module extends BaseModule
     public function init()
     {
         parent::init();
+        die("Recipe Module Loaded");
     }
 }
