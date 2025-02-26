@@ -224,6 +224,36 @@ class Recipe extends ActiveRecord
                 "message"=>"The detailed steps format is incorrect",
                 'on' => 'edit_recipe',
             ],
+
+            //我的食谱验证
+            [['page'], 'required',
+                'when' => function () {
+                    return Yii::$app->request->get('page', null) !== null;
+                },
+                'message' => 'Page cannot be empty.',
+                'on' => 'my_recipe',
+            ],
+            [['page'], 'integer',
+                'min' => 1,
+                'message' => 'Page Incorrect type parameter',
+                'tooSmall' => 'Page number minimum 1',
+                'on' => 'my_recipe',
+            ],
+            [['size'], 'required',
+                'when' => function () {
+                    return Yii::$app->request->get('size', null) !== null;
+                },
+                'message' => 'Size cannot be empty.',
+                'on' => 'my_recipe',
+            ],
+            [['size'], 'integer',
+                'min' => 1,
+                'max' => 100,
+                'message' => 'Size Incorrect type parameter',
+                'tooSmall' => 'Size number minimum 1',
+                'tooBig' => 'Size number maximum 100',
+                'on' => 'my_recipe',
+            ],
         ];
 
     }
@@ -251,6 +281,7 @@ class Recipe extends ActiveRecord
         $scenarios['del_recipe'] = ['id'];
         $scenarios['collect'] = ['id'];
         $scenarios['detail'] = ['id'];
+        $scenarios['my_recipe'] = ["page","size"];
         return $scenarios;
     }
 }

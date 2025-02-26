@@ -21,14 +21,43 @@ class RecipeController extends BaseController
         'del-recipe',
         'collect-list',
         'collect',
-        'detail'
-
-
+        'my-recipe'
+    ];
+    protected $recipeType = [
+        ["id"=>1,
+            "value"=>"western food"],
+        ["id"=>2,
+            "value"=>"philippine stew seasoning"],
+        ["id"=>3,
+            "value"=>"Guangdong cuisine"],
+        ["id"=>4,
+            "value"=>"Fujian cuisine"],
+        ["id"=>5,
+            "value"=>"Shandong cuisine"],
+        ["id"=>6,
+            "value"=>"Jiangxi cuisine"],
+        ["id"=>7,
+            "value"=>"Hubei cuisine"],
+        ["id"=>8,
+            "value"=>"Hainan cuisine"],
+        ["id"=>9,
+            "value"=>"Sichuan cuisine"],
+        ["id"=>10,
+            "value"=>"Hunan cuisine"],
     ];
 
     /**
+     * @desc actionRecipeType 菜谱类型
+     * @create_at 2025/2/26 11:06
+     * @return array
+     */
+    function actionRecipeType():array
+    {
+        return $this->formatJson(0, 'success', ["type_list"=>$this->recipeType]);
+    }
+    /**
      * @desc actionIndex 首页菜谱列表
-     * @create_at 2025/2/9 17:26
+     * @create_at 2025/2/26 17:26
      * @return array|string
      */
     function actionIndex():array
@@ -57,24 +86,22 @@ class RecipeController extends BaseController
             'id' => SORT_DESC,
         ])->offset($offset)->limit($pageSize)->asArray()->all();
         //查询推荐的3条的数据
-        $recommend = Recipe::find()->where(["recommend"=>2])->limit(3)->asArray()->all();
+        $recommend = Recipe::find()->select(["id","title","cover_img","type"])->where(["recommend"=>2])->limit(3)->asArray()->all();
         return $this->formatJson(0, 'success', compact('total','list','recommend'));
     }
 
     /**
      * @desc actionUploadImage  上传图片
-     * @create_at 2025/2/9 22:01
+     * @create_at 2025/2/26 22:01
      * @return array|string
      */
     function actionUploadImage(){
         //$userId = $this->getLoginUser();
         $model = new Recipe();
         $model->scenario = 'upload_image';
-        $model->image_file = UploadedFile::getInstanceByName('image_file');
-        if ($model->validate()) {
+        $model->image_file = UploadedFile::getInstanceByName('took');
+        if (!$model->validate()) {
             //return json_encode(['success' => true, 'url' => Yii::getAlias('@web/uploads/') . basename($filePath)]);
-        } else {
-            //print_r($model->errors);
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($model->getFirstErrors()));
         }
         $extension = substr($model->image_file->name, strrpos($model->image_file->name, '.') + 1);
@@ -100,7 +127,7 @@ class RecipeController extends BaseController
 
     /**
      * @desc actionAddRecipe
-     * @create_at 2025/2/10 10:29
+     * @create_at 2025/2/26 10:29
      * @return array|string
      */
     function actionAddRecipe():array
@@ -123,7 +150,7 @@ class RecipeController extends BaseController
 
     /**
      * @desc actionDelRecipe 删除食谱
-     * @create_at 2025/2/10 11:20
+     * @create_at 2025/2/26 11:20
      * @return array
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
@@ -151,7 +178,7 @@ class RecipeController extends BaseController
 
     /**
      * @desc actionCollectList 收藏列表
-     * @create_at 2025/2/10 15:20
+     * @create_at 2025/2/26 15:20
      * @return array
      */
     function actionCollectList():array
@@ -181,14 +208,14 @@ class RecipeController extends BaseController
         }
         $map[] = ['id'=>$recipeIds];
 
-        $list = Recipe::find()->where($map)->offset($offset)->limit($pageSize)->orderBy(["id"=>SORT_DESC])->asArray()->all();
+        $list = Recipe::find()->where($map)->select(["id","title","cover_img","type"])->offset($offset)->limit($pageSize)->orderBy(["id"=>SORT_DESC])->asArray()->all();
         $total = Recipe::find()->where($map)->count();
         return $this->formatJson(0, 'success',compact("list","total"));
     }
 
     /**
      * @desc actionCollect 收藏或者取消收藏
-     * @create_at 2025/2/10 17:23
+     * @create_at 2025/2/26 17:23
      * @return array
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
@@ -223,11 +250,12 @@ class RecipeController extends BaseController
 
     /**
      * @desc actionDetail 查看详情
-     * @create_at 2025/2/10 17:53
+     * @create_at 2025/2/26 17:53
      * @return array
      */
     function actionDetail():array
     {
+        $userId = $this->getLoginUserId();
         $request = Yii::$app->request;
         $recipeModel = new Recipe();
         $recipeModel->scenario = 'detail';
@@ -236,14 +264,21 @@ class RecipeController extends BaseController
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($recipeModel->getFirstErrors()));
         }
         $recipeId = $request->get("id",0);
-        $info = Recipe::find()->select(["id","title","cover_img","type","detail","created_at"])->where(["id"=>$recipeId])->asArray()->one();
-
+        $info = Recipe::find()->select(["id","title","cover_img","type","detail","created_at","user_id"])->where(["id"=>$recipeId])->asArray()->one();
+        if(!$info)
+            return $this->formatJson(-1, "recipe not exist");
+        $info["is_collect"] = 0;
+        $info["is_delete"] = 0;
+        if($userId){
+            $info["is_collect"] = $info["user_id"] == $userId ? 0 : 1;//0：不显示收藏按钮  1：显示收藏按钮
+            $info["is_delete"] = $info["user_id"] == $userId ? 1 : 0;//0：不显示删除按钮  1：显示删除按钮
+        }
         return $this->formatJson(0, 'success',compact("info"));
     }
 
     /**
      * @desc actionEditRecipe 编辑食谱
-     * @create_at 2025/2/10 18:00
+     * @create_at 2025/2/26 18:00
      * @return array
      */
     function actionEditRecipe():array
@@ -268,6 +303,30 @@ class RecipeController extends BaseController
         return $this->formatJson(0, 'action success');
     }
 
+    /**
+     * @desc actionMyRecipe
+     * @create_at 2025/2/26 15:26
+     * @return array
+     */
+    function actionMyRecipe():array
+    {
+        $userId = $this->getLoginUserId();
+        $request = Yii::$app->request;
+        $page = $request->get("page",1);
+        $pageSize = $request->get("size",10);
+        $recipeModel = new Recipe();
+        $recipeModel->scenario = 'my_recipe';
+        $recipeModel->load(Yii::$app->request->get(),"");
+        if (!$recipeModel->validate()) {
+            return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($recipeModel->getFirstErrors()));
+        }
+        $offset = ($page - 1) * $pageSize;
+        $total = Recipe::find()->where(["user_id"=>$userId])->count();
+        $list = Recipe::find()->where(["user_id"=>$userId])->select(["id","title","cover_img","type","created_at"])->orderBy([
+            'id' => SORT_DESC,
+        ])->offset($offset)->limit($pageSize)->asArray()->all();
+        return $this->formatJson(0, 'success', compact('total','list'));
+    }
 
 
     /**
@@ -303,6 +362,7 @@ class RecipeController extends BaseController
         }
         return $bucket;
     }
+
 
 
 }
