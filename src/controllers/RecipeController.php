@@ -267,11 +267,17 @@ class RecipeController extends BaseController
         $info = Recipe::find()->select(["id","title","cover_img","type","detail","created_at","user_id"])->where(["id"=>$recipeId])->asArray()->one();
         if(!$info)
             return $this->formatJson(-1, "recipe not exist");
-        $info["is_collect"] = 0;
-        $info["is_delete"] = 0;
+        $info["is_collect"] = 0;//0：不显示收藏按钮  1：显示收藏按钮
+        $info["is_delete"] = 0;//0：不显示删除按钮  1：显示删除按钮
+        $info["is_collected"] = 0;//0：未收藏  1：已收藏
         if($userId){
             $info["is_collect"] = $info["user_id"] == $userId ? 0 : 1;//0：不显示收藏按钮  1：显示收藏按钮
             $info["is_delete"] = $info["user_id"] == $userId ? 1 : 0;//0：不显示删除按钮  1：显示删除按钮
+            //判断是否收藏
+            if($info["is_collect"] == 1){
+                $collected = RecipeCollect::find()->select("id")->where(["user_id"=>$userId,"recipe_id"=>$recipeId])->asArray()->one();
+                $info["is_collected"] = $collected ? 1 : 0;
+            }
         }
         return $this->formatJson(0, 'success',compact("info"));
     }
@@ -304,7 +310,7 @@ class RecipeController extends BaseController
     }
 
     /**
-     * @desc actionMyRecipe
+     * @desc actionMyRecipe 我的发布
      * @create_at 2025/2/26 15:26
      * @return array
      */
