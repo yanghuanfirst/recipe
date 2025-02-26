@@ -325,7 +325,9 @@ class RecipeController extends BaseController
         $list = Recipe::find()->where(["user_id"=>$userId])->select(["id","title","cover_img","type","created_at"])->orderBy([
             'id' => SORT_DESC,
         ])->offset($offset)->limit($pageSize)->asArray()->all();
-        return $this->formatJson(0, 'success', compact('total','list'));
+        //收藏数量
+        $collectCount = RecipeCollect::find()->where(["user_id"=>$userId])->count();
+        return $this->formatJson(0, 'success', compact('total','list',"collectCount"));
     }
 
 
