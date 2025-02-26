@@ -9,7 +9,6 @@ class Module extends BaseModule
 
     public function init()
     {
-        echo 111;
         parent::init();
 
     }
