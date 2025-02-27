@@ -1,7 +1,7 @@
 # 食谱模块安装
 ### 1：直接在线上包，通过composer安装
 ```bash
-composer update ysx123/recipe:dev-master --ignore-platform-reqs
+composer require ysx123/recipe:dev-master --ignore-platform-reqs
 ```
 ### 2：在项目中增加模块的路由。修改配置文件：D:\www\ysx_www\ph02\shiny-pera-ios-dc\frontend\config\main.php
 ```php
