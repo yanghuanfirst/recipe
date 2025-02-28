@@ -43,4 +43,7 @@ php generater.php 目录名
 php generate_url.php 目录名 前缀
 ```
 
-### 6：在对应包中导入sql语句，文件在D:\www\ysx_www\ph02\shiny-pera-ios-dc\recipe\models\recipe.sql
+### 8：线上项目执行数据迁移，创建表
+```bash
+    php yii migrate --migrationPath=vendor/ysx123/recipe/src/migrations/
+```
