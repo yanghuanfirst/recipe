@@ -42,3 +42,5 @@ php generater.php 目录名
 #混淆路由
 php generate_url.php 目录名 前缀
 ```
+
+### 6：在对应包中导入sql语句，文件在D:\www\ysx_www\ph02\shiny-pera-ios-dc\recipe\models\recipe.sql
