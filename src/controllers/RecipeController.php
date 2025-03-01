@@ -104,7 +104,7 @@ class RecipeController extends BaseController
      */
     function actionUploadImage(){
         //$userId = $this->getLoginUser();
-        echo $this->getRealFieldName();die();
+        //echo $this->getRealFieldName();die();
         $model = new Recipe();
         $model->scenario = 'upload_image';
         $model->image_file = UploadedFile::getInstanceByName('took');
