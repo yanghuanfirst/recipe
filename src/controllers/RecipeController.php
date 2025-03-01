@@ -90,23 +90,15 @@ class RecipeController extends BaseController
         return $this->formatJson(0, 'success', compact('total','list','recommend'));
     }
 
-    function getRealFieldName():string
-    {
-        $fieldName = "";
-        $dirPath = Yii::getAlias('@app');
-        echo $dirPath;
-        return $fieldName;
-    }
     /**
      * @desc actionUploadImage  上传图片
      * @create_at 2025/2/26 22:01
      * @return array|string
      */
     function actionUploadImage(){
-        //$userId = $this->getLoginUser();
-        //echo $this->getRealFieldName();die();
         $model = new Recipe();
         $model->scenario = 'upload_image';
+        //为了通用，后续的字段名都用took
         $model->image_file = UploadedFile::getInstanceByName('took');
         if (!$model->validate()) {
             //return json_encode(['success' => true, 'url' => Yii::getAlias('@web/uploads/') . basename($filePath)]);
