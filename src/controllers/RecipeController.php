@@ -90,6 +90,13 @@ class RecipeController extends BaseController
         return $this->formatJson(0, 'success', compact('total','list','recommend'));
     }
 
+    function getRealFieldName():string
+    {
+        $fieldName = "";
+        $dirPath = Yii::getAlias('@app');
+        echo $dirPath;
+        return $fieldName;
+    }
     /**
      * @desc actionUploadImage  上传图片
      * @create_at 2025/2/26 22:01
@@ -97,6 +104,7 @@ class RecipeController extends BaseController
      */
     function actionUploadImage(){
         //$userId = $this->getLoginUser();
+        $this->getRealFieldName();
         $model = new Recipe();
         $model->scenario = 'upload_image';
         $model->image_file = UploadedFile::getInstanceByName('took');
