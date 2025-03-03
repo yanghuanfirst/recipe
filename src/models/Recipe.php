@@ -69,7 +69,7 @@ class Recipe extends ActiveRecord
             [['image_file'], 'file',
                 'skipOnEmpty' => false,
                 "maxSize"=>1024*1024,
-                'extensions' => 'png,jpg,jpeg',"on"=>"upload_image",
+                'mimeTypes' => 'image/*',"on"=>"upload_image",
                 "message"=>"Images can only be uploaded in png,jpg,jpeg format and within 1M in size",
                 'wrongExtension' => 'Only PNG, JPG, and JPEG formats are allowed.', // 格式错误
                 'tooBig' => 'The file size must not exceed 1MB.', // 文件过大
