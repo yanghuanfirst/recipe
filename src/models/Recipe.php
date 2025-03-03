@@ -201,7 +201,7 @@ class Recipe extends ActiveRecord
 
             ],
             [
-                ["type"],"required","message"=>"Please enter the type",'on' => 'add_recipe',
+                ["type"],"required","message"=>"Please enter the type",'on' => 'edit_recipe',
             ],
             [
                 ['type'], 'integer',
@@ -210,7 +210,7 @@ class Recipe extends ActiveRecord
                 'on' => 'edit_recipe',
             ],
             [
-                ["cover_img"],"required","message"=>"Please enter the cover picture",'on' => 'add_recipe',
+                ["cover_img"],"required","message"=>"Please enter the cover picture",'on' => 'edit_recipe',
             ],
             [['cover_img'], 'string',
                 "message"=>"The cover picture format is incorrect",
