@@ -138,7 +138,7 @@ class RecipeController extends BaseController
         $recipeModel->scenario = 'add_recipe';
         $recipeModel->load($data,'');
         Yii::info("userId: {$userId} 发布菜谱 " . json_encode($data, JSON_UNESCAPED_UNICODE), "appInfo");
-        Yii::info("userId: {$userId} 发布菜谱2 " . $recipeModel, "appInfo");
+        Yii::info("userId: {$userId} 发布菜谱2 " . json_encode($recipeModel->getErrors(), JSON_UNESCAPED_UNICODE), "appInfo");
         if (!$recipeModel->validate()) {
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($recipeModel->getFirstErrors()));
         }
