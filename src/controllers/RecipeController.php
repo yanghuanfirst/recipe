@@ -100,6 +100,7 @@ class RecipeController extends BaseController
         $model->scenario = 'upload_image';
         //为了通用，后续的字段名都用took
         $model->image_file = UploadedFile::getInstanceByName('took');
+        Yii::info("食谱上传图片 " . json_encode($model->image_file, JSON_UNESCAPED_UNICODE), "appInfo");
         if (!$model->validate()) {
             //return json_encode(['success' => true, 'url' => Yii::getAlias('@web/uploads/') . basename($filePath)]);
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($model->getFirstErrors()));
@@ -262,6 +263,7 @@ class RecipeController extends BaseController
         $recipeModel = new Recipe();
         $recipeModel->scenario = 'detail';
         $recipeModel->load(Yii::$app->request->get(),"");
+        Yii::info("userId: {$userId} 食谱详情 " . json_encode(Yii::$app->request->get(), JSON_UNESCAPED_UNICODE), "appInfo");
         if (!$recipeModel->validate()) {
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($recipeModel->getFirstErrors()));
         }
