@@ -221,7 +221,7 @@ class Recipe extends ActiveRecord
             ],
             [
                 ['detail'], 'string',
-                "message"=>"The detailed steps format is incorrect",
+                "message"=>"The detailed steps format is incorrect.",
                 'on' => 'edit_recipe',
             ],
 
