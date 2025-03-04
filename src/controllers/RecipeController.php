@@ -24,6 +24,8 @@ class RecipeController extends BaseController
         'my-recipe'
     ];
     protected $recipeType = [
+        ["id"=>0,
+            "value"=>"All"],
         ["id"=>1,
             "value"=>"western food"],
         ["id"=>2,
