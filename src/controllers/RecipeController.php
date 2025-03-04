@@ -24,28 +24,49 @@ class RecipeController extends BaseController
         'my-recipe'
     ];
     protected $recipeType = [
-        ["id"=>0,
-            "value"=>"All"],
-        ["id"=>1,
-            "value"=>"western food"],
-        ["id"=>2,
-            "value"=>"philippine stew seasoning"],
-        ["id"=>3,
-            "value"=>"Guangdong cuisine"],
-        ["id"=>4,
-            "value"=>"Fujian cuisine"],
-        ["id"=>5,
-            "value"=>"Shandong cuisine"],
-        ["id"=>6,
-            "value"=>"Jiangxi cuisine"],
-        ["id"=>7,
-            "value"=>"Hubei cuisine"],
-        ["id"=>8,
+        [
+            "id"=>0,
+            "value"=>"All",
+        ],
+        [
+            "id"=>1,
+            "value"=>"western food",
+        ],
+        [
+            "id"=>2,
+            "value"=>"philippine stew seasoning",
+        ],
+        [
+            "id"=>3,
+            "value"=>"Guangdong cuisine",
+        ],
+        [
+            "id"=>4,
+            "value"=>"Fujian cuisine",
+        ],
+        [
+            "id"=>5,
+            "value"=>"Shandong cuisine",
+        ],
+        [
+            "id"=>6,
+            "value"=>"Jiangxi cuisine",
+        ],
+        [
+            "id"=>7,
+            "value"=>"Hubei cuisine"
+        ],
+        [
+            "id"=>8,
             "value"=>"Hainan cuisine"],
-        ["id"=>9,
-            "value"=>"Sichuan cuisine"],
-        ["id"=>10,
-            "value"=>"Hunan cuisine"],
+        [
+            "id"=>9,
+            "value"=>"Sichuan cuisine"
+        ],
+        [
+            "id"=>10,
+            "value"=>"Hunan cuisine"
+        ]
     ];
 
     /**
@@ -55,7 +76,17 @@ class RecipeController extends BaseController
      */
     function actionRecipeType():array
     {
-        return $this->formatJson(0, 'success', ["type_list"=>$this->recipeType]);
+        $result = [];
+        $h5Path = Yii::$app->params['H5_URL'];
+        foreach ($this->recipeType as $k=>$v){
+            $result[$k] = [
+                "id"=>$v['id'],
+                "value"=>$v['value'],
+                "recipe_type_img_selected"=>$h5Path."/recipe/y".($k+1).".png",
+                "recipe_type_img_no"=>$h5Path."/recipe/n".($k+1).".png",
+            ];
+        }
+        return $this->formatJson(0, 'success', ["type_list"=>$result]);
     }
     /**
      * @desc actionIndex 首页菜谱列表
