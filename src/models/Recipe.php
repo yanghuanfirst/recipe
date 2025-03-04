@@ -91,8 +91,8 @@ class Recipe extends ActiveRecord
             ],
             [
                 ['type'], 'integer',
-                'min' => 1,
-                'tooSmall' => 'The minimum length of the type is 1',
+                'min' => 0,//为了兼容前端，暂时不做验证。因为下发了一个全部all类型，类型是0，暂时不做验证。
+                'tooSmall' => 'The minimum length of the type is 0',
                 'on' => 'add_recipe',
             ],
             [
