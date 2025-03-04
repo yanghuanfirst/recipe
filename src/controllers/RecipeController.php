@@ -1,6 +1,6 @@
 <?php
 namespace ysx\recipe\controllers;
- 
+
 use common\enums\codes\ResponseCode;
 use common\helpers\OssHelper;
 use common\helpers\ReturnHelper;
@@ -190,12 +190,12 @@ class RecipeController extends BaseController
     {
         $userId = $this->getLoginUserId();
         $request = Yii::$app->request;
-        $title = $request->get('title',"");//标题
-        $page = $request->get("page",1);
-        $pageSize = $request->get("size",10);
+        $title = $request->post('title',"");//标题
+        $page = $request->post("page",1);
+        $pageSize = $request->post("size",10);
         $recipeModel = new Recipe();
         $recipeModel->scenario = 'collect_list';
-        $recipeModel->load(Yii::$app->request->get(),"");
+        $recipeModel->load(Yii::$app->request->post(),"");
         if (!$recipeModel->validate()) {
             return $this->formatJson(ResponseCode::PARAM_CHECK_FAIL, current($recipeModel->getFirstErrors()));
         }
