@@ -42,8 +42,11 @@ php generater.php 目录名
 #混淆路由
 php generate_url.php 目录名 前缀
 ```
+### 6：上传图片接口的key,固定位took,需要手动改一下文档
 
-### 8：线上项目执行数据迁移，创建表
+### 7：线上项目执行数据迁移，创建表
 ```bash
     php yii migrate --migrationPath=vendor/ysx123/recipe/src/migrations/
 ```
+
+### 8:类型图标问题。如果设计图中有类型图标，需要手动上传到H5项目的中 recipe 目录，然后图片地址固定位y1.png到y10-png（这是选中的图片），未选中的是n1.png到n10.png。
