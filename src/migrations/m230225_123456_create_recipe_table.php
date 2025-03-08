@@ -12,14 +12,12 @@ class m230225_123456_create_recipe_table extends Migration
 
         $this->createTable('{{%recipe}}', [
             'id' => $this->primaryKey()->unsigned()->comment('主键ID'),
-            'title' => $this->string(200)->notNull()->defaultValue('')->comment('食谱(文章)标题'),
+            'title' => $this->string(200)->notNull()->defaultValue('')->comment('食谱标题'),
             'cover_img' => $this->string(255)->notNull()->defaultValue('')->comment('封面图片'),
             'type' => $this->smallInteger(3)->defaultValue(null)->comment('类型'),
             'recommend' => $this->tinyInteger(1)->notNull()->defaultValue(1)->comment('1：不推荐 2：推荐'),
             'detail' => $this->text()->notNull()->comment('详细内容'),
             'user_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('用户ID'),
-            'collect_num' => $this->integer(11)->notNull()->defaultValue(0)->comment('收藏数'),
-            'like_num' => $this->integer(11)->notNull()->defaultValue(0)->comment('点赞数'),
             'created_at' => $this->timestamp()->defaultValue(null)->comment('创建时间'),
             'updated_at' => $this->timestamp()->defaultValue(null)->comment('更新时间'),
         ], $tableOptions);

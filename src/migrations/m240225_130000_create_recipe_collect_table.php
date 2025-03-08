@@ -13,8 +13,7 @@ class m240225_130000_create_recipe_collect_table extends Migration
         $this->createTable('{{%recipe_collect}}', [
             'id' => $this->primaryKey()->unsigned()->comment('主键ID'),
             'user_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('用户ID'),
-            'recipe_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('食谱（文章）表ID'),
-            'action_type' => $this->smallInteger(1)->notNull()->defaultValue(1)->comment('操作类型：1收藏，2点赞'),
+            'recipe_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('食谱表ID'),
             'created_at' => $this->timestamp()->defaultValue(null)->comment('收藏时间'),
             'updated_at' => $this->timestamp()->defaultValue(null)->comment('更新时间'),
         ], $tableOptions);

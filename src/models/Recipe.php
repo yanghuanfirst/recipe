@@ -169,17 +169,6 @@ class Recipe extends ActiveRecord
                 'tooSmall' => 'The minimum length of the type is 1',
                 "message"=>"Missing parameter",'on' => 'collect',
             ],
-            [
-                ["action_type"],"required","message"=>"Missing parameter",'on' => 'collect',
-            ],
-            [
-                ["action_type"],"integer",
-                'min' => 1,
-                "max"=>2,
-                'tooSmall' => 'The minimum length of the type is 1',
-                'tooBig' => 'The maximum length of the type is 2',
-                "message"=>"Missing parameter",'on' => 'collect',
-            ],
             //查看详情
             [
                 ["id"],"required","message"=>"Missing parameter",'on' => 'detail',
@@ -265,71 +254,6 @@ class Recipe extends ActiveRecord
                 'tooBig' => 'Size number maximum 100',
                 'on' => 'my_recipe',
             ],
-            //发布评论验证
-            [
-                ['comment_content'], 'string',
-                "message"=>"The comment content format is incorrect",
-                'on' => 'add_comment',
-            ],
-            [
-                ['comment_content'],
-                'max' => 1000,
-                "min" => 1,
-                'on' => 'add_comment',
-                'tooLong' => 'The maximum length of the comment content is 100 characters',
-                "tooShort" => 'The minimum length of the comment content is 1 characters'
-
-            ],
-            [
-                ['recipe_id'], 'integer',
-                'min' => 1,
-                'message' => 'ID Incorrect type parameter',
-                'tooSmall' => 'ID number minimum 1',
-                'on' => 'add_comment',
-            ],
-            //评论列表验证
-            [['page'], 'required',
-                'when' => function () {
-                    return Yii::$app->request->get('page', null) !== null;
-                },
-                'message' => 'Page cannot be empty.',
-                'on' => 'recipe_comment_list',
-            ],
-            [['page'], 'integer',
-                'min' => 1,
-                'message' => 'Page Incorrect type parameter',
-                'tooSmall' => 'Page number minimum 1',
-                'on' => 'recipe_comment_list',
-            ],
-            [['size'], 'required',
-                'when' => function () {
-                    return Yii::$app->request->get('size', null) !== null;
-                },
-                'message' => 'Size cannot be empty.',
-                'on' => 'recipe_comment_list',
-            ],
-            [['size'], 'integer',
-                'min' => 1,
-                'max' => 100,
-                'message' => 'Size Incorrect type parameter',
-                'tooSmall' => 'Size number minimum 1',
-                'tooBig' => 'Size number maximum 100',
-                'on' => 'recipe_comment_list',
-            ],
-
-            //删除评论验证
-            [['comment_id'], 'required',
-                'message' => 'param cannot be empty.',
-                'on' => 'del_comment',
-            ],
-            [['comment_id'], 'integer',
-                'min' => 1,
-                'message' => 'Page Incorrect type parameter',
-                'tooSmall' => 'Page number minimum 1',
-                'on' => 'del_comment',
-            ]
-
-
         ];
 
     }
