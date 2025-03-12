@@ -1,5 +1,5 @@
 # 食谱模块安装
-### 1：直接在线上包，通过composer安装
+### 1：通过composer安装
 ```bash
 composer require ysx123/recipe:dev-master --ignore-platform-reqs
 ```
