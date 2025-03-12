@@ -30,42 +30,38 @@ class RecipeController extends BaseController
         ],
         [
             "id"=>1,
-            "value"=>"western food",
+            "value"=>"Snacks",
         ],
         [
             "id"=>2,
-            "value"=>"philippine stew seasoning",
+            "value"=>"Pastry",
         ],
         [
             "id"=>3,
-            "value"=>"Guangdong cuisine",
+            "value"=>"Pasta",
         ],
         [
             "id"=>4,
-            "value"=>"Fujian cuisine",
+            "value"=>"Beans",
         ],
         [
             "id"=>5,
-            "value"=>"Shandong cuisine",
+            "value"=>"Vegetable",
         ],
         [
             "id"=>6,
-            "value"=>"Jiangxi cuisine",
+            "value"=>"Bread",
         ],
         [
             "id"=>7,
-            "value"=>"Hubei cuisine"
+            "value"=>"Drinks",
         ],
         [
             "id"=>8,
-            "value"=>"Hainan cuisine"],
+            "value"=>"Beef"],
         [
             "id"=>9,
-            "value"=>"Sichuan cuisine"
-        ],
-        [
-            "id"=>10,
-            "value"=>"Hunan cuisine"
+            "value"=>"Fish"
         ]
     ];
 
