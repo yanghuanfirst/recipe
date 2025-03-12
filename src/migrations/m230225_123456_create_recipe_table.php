@@ -133,7 +133,7 @@ Coat the pork pieces in cornstarch and deep-fry until crispy. Set aside.
 In a wok, stir-fry bell peppers and pineapple for 2 minutes.
 Mix vinegar, ketchup, sugar, and soy sauce in a bowl, then pour into the wok.
 Add fried pork and toss well until coated in sauce. Serve hot.','6359','2025-03-03 22:43:33','2025-03-03 22:43:33');
-INSERT INTO `recipe` (`id`, `title`, `cover_img`, `type`, `recommend`, `detail`, `user_id`, `created_at`, `updated_at`) VALUES ('35','Sichuan Hot Pot','http://ph02-pera-life-ios.oss-ap-southeast-6.aliyuncs.com/recipe/20250303224513_7nia1go392.png?OSSAccessKeyId=LTAI5tBg8SgAttbiT8E54G3C&Expires=1930229113&Signature=TlfNap6l8m9dP%2F5Qh4ez02IU76Q%3D','9','2','Flavor: Spicy, numbing
+INSERT INTO `recipe` (`id`, `title`, `cover_img`, `type`, `recommend`, `detail`, `user_id`, `created_at`, `updated_at`) VALUES ('35','Hot Pot','http://ph02-pera-life-ios.oss-ap-southeast-6.aliyuncs.com/recipe/20250303224513_7nia1go392.png?OSSAccessKeyId=LTAI5tBg8SgAttbiT8E54G3C&Expires=1930229113&Signature=TlfNap6l8m9dP%2F5Qh4ez02IU76Q%3D','9','2','Flavor: Spicy, numbing
 Main Ingredients:
 3 dried chili peppers
 1 tbsp Sichuan peppercorns
