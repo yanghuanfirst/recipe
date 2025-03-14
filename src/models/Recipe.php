@@ -282,6 +282,7 @@ class Recipe extends ActiveRecord
         $scenarios['del_recipe'] = ['id'];
         $scenarios['collect'] = ['id'];
         $scenarios['detail'] = ['id'];
+        $scenarios['collect_list'] = ['title',"page","size"];
         $scenarios['my_recipe'] = ["page","size"];
         return $scenarios;
     }
